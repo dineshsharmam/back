@@ -8,21 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.backclick.databinding.FragmentLandingBinding
+import com.example.backclick.databinding.LytRecyclerViewBinding
 
 class RecyclerViewAdapter(val list: ArrayList<Int>):RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lyt_recycler_view, parent, false)
-
-        return ViewHolder(view)
+        val binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context)
+            ,R.layout.lyt_recycler_view, parent, false) as LytRecyclerViewBinding
+        return ViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pos = position
-        holder.textView.text = "item number ${list[position]}"
-        holder.textView.setOnClickListener(object : View.OnClickListener{
+        holder.mbinding.tvTitle.text = "item number ${list[position]}"
+        holder.mbinding.tvTitle.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View) {
                 openFragment(pos,p0.context)
             }
@@ -46,6 +48,6 @@ class RecyclerViewAdapter(val list: ArrayList<Int>):RecyclerView.Adapter<ViewHol
         return list.size
     }
 }
-class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-    val textView = itemView.findViewById<TextView>(R.id.tv_title)
+class ViewHolder(binding: LytRecyclerViewBinding): RecyclerView.ViewHolder(binding.root){
+    val mbinding = binding
 }
