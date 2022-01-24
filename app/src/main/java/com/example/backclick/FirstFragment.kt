@@ -2,6 +2,7 @@ package com.example.backclick
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class FirstFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
                 lastPos =
                     (binding.recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                //Log.d("check", "onScrollStateChanged: $lastPos")
             }
         })
         return binding.root
